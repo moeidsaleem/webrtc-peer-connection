@@ -5,7 +5,8 @@ const fs = require('fs');
 const WebSocket = require('ws');
 const WebSocketServer = WebSocket.Server;
 
-const port = 3000;
+let PORT = process.env.PORT || 3000;
+
 
 var key = fs.readFileSync(__dirname + '/certs/localhost.key');
 var cert = fs.readFileSync(__dirname + '/certs/localhost.crt');
@@ -23,7 +24,7 @@ app.use('/', express.static(__dirname + '/public'));
 
 var server = https.createServer(options, app);
 
-server.listen(port, () => {
+server.listen(PORT, () => {
   console.log("server starting on port : " + port)
 });
 

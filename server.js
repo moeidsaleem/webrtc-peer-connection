@@ -12,7 +12,11 @@ var key = fs.readFileSync(__dirname + '/certs/localhost.key');
 var cert = fs.readFileSync(__dirname + '/certs/localhost.crt');
 var options = {
   key: key,
-  cert: cert
+  cert: cert,
+  autoRewrite: true,
+  changeOrigin: true,
+  ws: true
+
 };
 
 app = express()
@@ -24,15 +28,16 @@ app.use('/', express.static(__dirname + '/public'));
 
 var server = https.createServer(options, app);
 
+// Create a server for handling websocket calls
+const wss = new WebSocketServer({server: server});
+
+
 server.listen(PORT, () => {
-  console.log("server starting on port : " + port)
+  console.log("server starting on port : " + PORT)
 });
 
 
 // ----------------------------------------------------------------------------------------
-
-// Create a server for handling websocket calls
-const wss = new WebSocketServer({server: server});
 
 wss.on('connection', function(ws) {
   ws.on('message', function(message) {

@@ -5,7 +5,7 @@ const fs = require('fs');
 const WebSocket = require('ws');
 const WebSocketServer = WebSocket.Server;
 
-let PORT = 80;
+let PORT = 8080;
 
 
 var key = fs.readFileSync(__dirname + '/certs/localhost.key');
@@ -30,8 +30,9 @@ app.use('/', express.static(__dirname + '/public'));
 // server.listen(PORT, () => {
 //   console.log("server starting on port : " + PORT)
 // });
-let server = app;
 app.listen(PORT, ()=> console.log('server rnning on ' + PORT))
+let server = app;
+
 // Create a server for handling websocket calls
 const wss = new WebSocketServer({server: server});
 

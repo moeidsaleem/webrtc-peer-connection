@@ -5,7 +5,7 @@ const fs = require('fs');
 const WebSocket = require('ws');
 const WebSocketServer = WebSocket.Server;
 
-let PORT = process.env.PORT || 80;
+let PORT = 80;
 
 
 var key = fs.readFileSync(__dirname + '/certs/localhost.key');

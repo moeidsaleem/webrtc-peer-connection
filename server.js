@@ -26,11 +26,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/', express.static(__dirname + '/public'));
 
-var server = https.createServer(options, app);
-server.listen(PORT, () => {
-  console.log("server starting on port : " + PORT)
-});
-
+// var server = https.createServer(options, app);
+// server.listen(PORT, () => {
+//   console.log("server starting on port : " + PORT)
+// });
+let server = app;
+app.listen(PORT, ()=> console.log('server rnning on ' + PORT))
 // Create a server for handling websocket calls
 const wss = new WebSocketServer({server: server});
 
